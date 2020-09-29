@@ -1,0 +1,51 @@
+{
+  "name": "lockit-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run prod",
+    "server": "node ./dist-server/bin/www",
+    "transpile": "babel ./server --out-dir dist-server",
+    "clean": "rimraf dist-server",
+    "build": "npm-run-all clean transpile",
+    "dev": "NODE_ENV=development npm-run-all build server",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "watch:dev": "nodemon"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
+  },
+  "comment-dependencies": {
+    "@babel/cli": "improved version of babel-cli. Used for transpilation by babel.",
+    "@babel/core": "same as @babel/cli replace by babel-core",
+    "@babel/preset-env": "same as @babel/cli replace by babel-preset-env",
+    "nodemon": "used to constantly watch for file change",
+    "npm-run-all": "Some commands not run on terminals like windows powershell this makes sure they run properly",
+    "rimraf": "for clearing the dist-server folder before reload.",
+    "@babel/plugin-*": "babel plugins required in transpilations."
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4"
+  },
+  "comment-scripts": {
+    "start": "It is set default to npm run prod as it is used by many depolyment environments like AWS, Heroku.",
+    "clean": "cleans the dist-server folder for re-transpilation.",
+    "transpile": "runs babel to put the transpiled code to dist-server folder.",
+    "build": "runs clean and transpile",
+    "server": "runs the transpiled www.js from dist-server folder.",
+    "dev": "sets the development environment to development and builds and runs server.",
+    "prod": "sets the production environment to development and builds and runs server.",
+    "watch:dev": "To start development server with nodemon to watch for file changes."
+  }
+}
